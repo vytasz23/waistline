@@ -1,0 +1,13 @@
+cordova run browser
+
+cordova run android
+cordova run android --nobuild --noprepare
+
+adb connect 192.168.1.50:33231
+
+if (No Java files found that extend CordovaActivity){
+    cordova platform rm android
+    cordova platform add android
+}
+
+docker run -it -p 8000:8000 -v D:\Projects\Web\waistline:/waistline/app/ --name waistline_app waistline /bin/sh

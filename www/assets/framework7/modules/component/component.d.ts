@@ -2,10 +2,10 @@ import Framework7, {
   Framework7EventsClass,
   Framework7Plugin,
   CSSSelector,
-} from '../../components/app/app-class';
+} from '../../components/app/app-class.js';
 import { Dom7, Dom7Array } from 'dom7';
-import { Router } from '../../modules/router/router';
-import { StoreObject as Store } from '../../modules/store/store';
+import { Router } from '../../modules/router/router.js';
+import { StoreObject as Store } from '../../modules/store/store.js';
 
 interface ComponentRender extends Function {}
 
@@ -20,11 +20,10 @@ export interface ComponentContext {
   $f7router: Router.Router;
   /** Framework7 app instance */
   $f7: Framework7;
-  /** Object with md, ios and aurora boolean properties which indicating current theme.  */
+  /** Object with `md` and `ios` boolean properties which indicating current theme.  */
   $theme: {
     ios: boolean;
     md: boolean;
-    aurora: boolean;
   };
   /** Main app store */
   $store: Store;
@@ -34,6 +33,22 @@ export interface ComponentContext {
   };
   /** Create reactive variable */
   $ref: (initialValue: any) => { value: any };
+
+  /** Create reactive state */
+  $useState: (initialValue: any) => {
+    state: any;
+    update: (value: any) => void;
+    remove: (pos: any) => void;
+    clear: () => void;
+    insert: (pos: any, value: any) => void;
+    replace: (pos: any, value: any) => void;
+    append: (value: any) => void;
+    prepend: (value: any) => void;
+    swap: (a: any, b: any) => void;
+    fromTo: (a: any, b: any) => void;
+    method: (f: any) => void;
+    async: (f: any) => void;
+  };
 
   /** Defer the callback to be executed after the next DOM update cycle. Use it immediately after you’ve changed some data to wait for the DOM update.  */
   $tick: (callback?: () => void) => Promise<any>;
@@ -46,9 +61,9 @@ export interface ComponentContext {
   /** Render function */
   $render: ComponentRender;
   /** Attach event handler to component root DOM element */
-  $on: (eventName, handler: () => void) => void;
+  $on: (eventName: string, handler: () => void) => void;
   /** Attach event handler to component root DOM element that will be executed only once */
-  $once: (eventName, handler: () => void) => void;
+  $once: (eventName: string, handler: () => void) => void;
   /** Hook called right before component will be added to DOM */
   $onBeforeMount: (callback: () => void) => void;
   /** Hook called right after component has been added to DOM */

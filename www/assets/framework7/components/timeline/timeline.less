@@ -78,7 +78,6 @@
   box-sizing: border-box;
   border-radius: var(--f7-timeline-item-inner-border-radius);
   padding: 8px var(--f7-timeline-padding-horizontal);
-  box-shadow: var(--f7-timeline-item-inner-box-shadow);
 
   + .timeline-item-inner {
     margin-top: var(--f7-timeline-inner-block-margin-vertical);
@@ -104,7 +103,7 @@
   position: relative;
   width: 10px;
   height: 10px;
-  background: #bbb;
+  background: var(--f7-timeline-divider-color);
   border-radius: 50%;
   flex-shrink: 0;
   margin: 3px var(--f7-timeline-divider-margin-horizontal) 0;
@@ -244,7 +243,6 @@ each(@breakpoints, {
     color: var(--f7-bars-text-color);
     .ios-translucent-bars(var(--f7-bars-bg-color-rgb));
     .hairline(bottom, var(--f7-timeline-horizontal-item-date-border-color));
-    .bar-shadow-bottom(var(--f7-timeline-horizontal-item-date-shadow-image));
     .ltr({
       text-align: left;
     });
@@ -252,12 +250,10 @@ each(@breakpoints, {
       text-align: right;
     });
   }
-  &.no-shadow .timeline-item-date:before {
-    display: none;
-  }
+
   .timeline-item-content {
     padding: var(--f7-timeline-horizontal-item-padding);
-    height: calc(100% - var(--f7-timeline-horizontal-item-padding));
+    height: calc(100vw - var(--f7-timeline-horizontal-item-padding));
     .scrollable();
     margin: 0;
   }
@@ -268,21 +264,45 @@ each(@breakpoints, {
   .timeline-month:last-child .timeline-item:last-child {
     .hairline-remove(right);
   }
-
-  @cols: 5, 10, 15, 20, 25, 30, 100/3, 35, 40, 45, 50, 55, 60, 65, 100 * (2/3), 70, 75, 80, 85, 90,
-    95, 100;
+  @cols: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20;
   each(@cols, {
     @className: floor((@value));
-    &.col-@{className} .timeline-item {
-      width: ~"@{value}vw";
+    &.timeline-cols-@{className} .timeline-item {
+      width: ~"calc(100vw / @{value})";
     }
   });
-
-  @media (min-width: 768px) {
+  @media (min-width: @breakpoints[xsmall]) {
     each(@cols, {
-      @className: floor((@value));
-      &.tablet-@{className} .timeline-item {
-        width: ~"@{value}vw";
+      &.xsmall-timeline-cols-@{value} .timeline-item {
+         width: ~"calc(100vw / @{value})";
+      }
+    });
+  }
+  @media (min-width: @breakpoints[small]) {
+    each(@cols, {
+      &.small-timeline-cols-@{value} .timeline-item {
+         width: ~"calc(100vw / @{value})";
+      }
+    });
+  }
+  @media (min-width: @breakpoints[medium]) {
+    each(@cols, {
+      &.medium-timeline-cols-@{value} .timeline-item {
+         width: ~"calc(100vw / @{value})";
+      }
+    });
+  }
+  @media (min-width: @breakpoints[large]) {
+    each(@cols, {
+      &.large-timeline-cols-@{value} .timeline-item {
+         width: ~"calc(100vw / @{value})";
+      }
+    });
+  }
+  @media (min-width: @breakpoints[xlarge]) {
+    each(@cols, {
+      &.xlarge-timeline-cols-@{value} .timeline-item {
+         width: ~"calc(100vw / @{value})";
       }
     });
   }
@@ -390,7 +410,4 @@ each(@breakpoints, {
 });
 .if-md-theme({
   @import './timeline-md.less';
-});
-.if-aurora-theme({
-  @import './timeline-aurora.less';
 });

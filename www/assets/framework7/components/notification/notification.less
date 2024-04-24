@@ -2,8 +2,6 @@
 @import './notification-vars.less';
 
 .notification {
-  --f7-link-highlight-color: var(--f7-link-highlight-black);
-  --f7-touch-ripple-color: var(--f7-touch-ripple-black);
   position: absolute;
   left: var(--f7-notification-margin);
   top: var(--f7-notification-margin);
@@ -17,7 +15,7 @@
   transition-property: transform;
   direction: ltr;
   max-width: var(--f7-notification-max-width);
-  padding: var(--f7-notification-padding);
+  padding: var(--f7-notification-padding-vertical) var(--f7-notification-padding-horizontal);
   border-radius: var(--f7-notification-border-radius);
   box-shadow: var(--f7-notification-box-shadow);
   background: var(--f7-notification-bg-color);
@@ -93,7 +91,4 @@
 });
 .if-md-theme({
   @import './notification-md.less';
-});
-.if-aurora-theme({
-  @import './notification-aurora.less';
 });

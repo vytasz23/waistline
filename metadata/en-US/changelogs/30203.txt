@@ -1,2 +1,0 @@
-You can find the full changelog at 
-https://github.com/davidhealey/waistline/releases

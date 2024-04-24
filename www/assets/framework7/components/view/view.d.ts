@@ -1,6 +1,10 @@
 import { Dom7Array } from 'dom7';
-import Framework7, { CSSSelector, Framework7EventsClass, Framework7Plugin } from '../app/app-class';
-import { Router } from '../../modules/router/router';
+import Framework7, {
+  CSSSelector,
+  Framework7EventsClass,
+  Framework7Plugin,
+} from '../app/app-class.js';
+import { Router } from '../../modules/router/router.js';
 
 export namespace View {
   interface View extends Framework7EventsClass<Events> {
@@ -26,6 +30,8 @@ export namespace View {
     destroy(): void;
   }
   interface Parameters {
+    /** If enabled and View is tab, it won't initialize router and load initial page until View tab becomes visible */
+    initRouterOnTabShow?: boolean;
     /**	View name. If view was created with name, then it may be accessed via app.views.[name] */
     name?: string;
     /**	Specify whether this is View is main or not. If not passed then will be determined based on whether its element has view-main class or not */
@@ -34,8 +40,6 @@ export namespace View {
     router?: boolean;
     /**	Default (initial) View's url. If not specified, then it is equal to document url */
     url?: string;
-    /**	If enabled then all previous pages in navigation chain will not be removed from DOM when you navigate deeper and deeper. It could be useful, for example, if you have some Form from 5 steps (5 pages) and when you are on last 5th page you need access to form that was on 1st page. */
-    stackPages?: boolean;
     /**	CSS Selector of another view or object with initialized View instance. By default all links in initialized (only) view will load pages in this view. This tell links to load pages in other view. */
     linksView?: CSSSelector | View;
     /**	You may enable this parameter to allow loading of new pages that have same url as currently "active" page in View. */
@@ -60,8 +64,6 @@ export namespace View {
     iosPageLoadDelay?: number;
     /**	Delay (in ms) after new page will be loaded and inserted to DOM and before it will be transitioned. Can be increased a bit to improve performance. Will have effect only under MD theme */
     mdPageLoadDelay?: number;
-    /**	Delay (in ms) after new page will be loaded and inserted to DOM and before it will be transitioned. Can be increased a bit to improve performance. Will have effect only under Aurora theme */
-    auroraPageLoadDelay?: number;
     /**	When enabled then router will pass route url query to request url query (for url, componentUrl route properties) */
     passRouteQueryToRequest?: boolean;
     /**	When enabled then router will pass current route parameters to request url query (for url, componentUrl route properties) */
@@ -132,17 +134,7 @@ export namespace View {
     mdSwipeBackAnimateShadow?: boolean;
     /**	Enable/disable opacity animation during swipe back action. You can disable it to improve performance. For MD theme */
     mdSwipeBackAnimateOpacity?: boolean;
-    /**	Enable/disable ability to swipe back from left edge of screen to get to the previous page. For Aurora theme */
-    auroraSwipeBack?: boolean;
-    /**	Value in px. Swipe back action will start if "touch distance" will be more than this value. For Aurora theme */
-    auroraSwipeBackThreshold?: number;
-    /**	Value in px. Width of invisible left edge of the screen that triggers swipe back action. For Aurora theme */
-    auroraSwipeBackActiveArea?: number;
-    /**	Enable/disable box-shadow animation during swipe back action. You can disable it to improve performance. For Aurora theme */
-    auroraSwipeBackAnimateShadow?: boolean;
-    /**	Enable/disable opacity animation during swipe back action. You can disable it to improve performance. For Aurora theme */
-    auroraSwipeBackAnimateOpacity?: boolean;
-    /**	If you develop web app (not PhoneGap or Home Screen web app) it is useful to enable hash navigation (browser url will look like "http://my-webapp.com/#!/about.html"). User as well will be able to navigate through app's history by using browser's default back and forward buttons. */
+    /**	If you develop web app (not Cordova/Capacitor or Home Screen web app) it is useful to enable hash navigation (browser url will look like "http://my-webapp.com/#!/about.html"). User as well will be able to navigate through app's history by using browser's default back and forward buttons. */
     browserHistory?: boolean;
     /**	Browser history root URL, for example "http://my-app.com/". It is useful only in case when you use empty ("") browserHistorySeparator */
     browserHistoryRoot?: string;
@@ -158,6 +150,8 @@ export namespace View {
     browserHistoryInitialMatch?: boolean;
     /**	When enabled (by default), it will store router history in localStorage and try to restore it on next web app visit */
     browserHistoryStoreHistory?: boolean;
+    /** When "replace" (by default), it will replace state on routable tabs change, otherwise (if "push"), it will add to history every routable tab change, so it will be possible to switch back between tabs with browser back button */
+    browserHistoryTabs?: 'replace' | 'push';
     /** Object with events handlers.. */
     on?: {
       [event in keyof Events]?: Events[event];

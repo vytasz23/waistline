@@ -426,7 +426,7 @@ app.FoodsMealsRecipes = {
     return 0;
   },
 
-  renderItem: async function(data, el, checkbox, sortable, clickable, clickCallback, tapholdCallback, checkboxCallback, timestamp, showBrand, thumbnailSetting) {
+  renderItem: async function(data, el, checkbox, sortable, clickable, clickCallback, tapholdCallback, checkboxCallback, timestamp, showBrand, thumbnailSetting, swipeCallback) {
 
     if (data !== undefined) {
 
@@ -445,11 +445,12 @@ app.FoodsMealsRecipes = {
       if (item !== undefined) {
 
         let li = document.createElement("li");
+        li.className = "swipeout";
         li.data = JSON.stringify(item);
         el.appendChild(li);
 
         let label = document.createElement("label");
-        label.className = "item-checkbox item-content";
+        label.className = "swipeout-content item-checkbox item-content";
         li.appendChild(label);
 
         //Checkbox
@@ -479,6 +480,26 @@ app.FoodsMealsRecipes = {
           li.appendChild(sortHandler);
         }
 
+        //===============SWIPEOUT BEGIN===============//
+
+        let swipeOut = document.createElement("div");
+        swipeOut.className = "swipeout-actions-right";
+        let swipeOutButton = document.createElement("a");
+        swipeOutButton.href = "#";
+        swipeOutButton.className = "swipeout-delete";
+        swipeOutButton.innerText = "Delete";
+        swipeOut.appendChild(swipeOutButton);
+        li.appendChild(swipeOut);
+
+        if (clickable !== false && swipeCallback !== undefined && item.id !== undefined) {
+          li.addEventListener("swipeout:deleted", function(e) {
+            e.preventDefault();
+            swipeCallback(item, li, false);
+          });
+        }
+
+        //===============SWIPEOUT END===============//
+
         //Thumbnail
         if (thumbnailSetting !== undefined) {
           let img = app.FoodsMealsRecipes.getItemThumbnail(item.image_url, thumbnailSetting);
@@ -504,7 +525,7 @@ app.FoodsMealsRecipes = {
 
         if (clickable !== false && tapholdCallback !== undefined && item.id !== undefined) {
           inner.addEventListener("taphold", function(e) {
-            e.preventDefault();
+            e.preventDefault();``
             tapholdCallback(item, li);
           });
         }

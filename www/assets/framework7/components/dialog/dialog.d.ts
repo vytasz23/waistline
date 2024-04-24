@@ -1,5 +1,9 @@
 import { Dom7Array } from 'dom7';
-import Framework7, { CSSSelector, Framework7EventsClass, Framework7Plugin } from '../app/app-class';
+import Framework7, {
+  CSSSelector,
+  Framework7EventsClass,
+  Framework7Plugin,
+} from '../app/app-class.js';
 
 export namespace Dialog {
   interface Dialog extends Framework7EventsClass<Events> {
@@ -40,8 +44,8 @@ export namespace Dialog {
   interface DialogButton {
     /** String with Button's text (could be HTML string). */
     text: string;
-    /** Enables bold button text. (default false) */
-    bold?: boolean;
+    /** Enables strong button style. (default false) */
+    strong?: boolean;
     /** Button color, one of default colors. */
     color?: string;
     /** If enabled then button click will close Dialog. (default true) */

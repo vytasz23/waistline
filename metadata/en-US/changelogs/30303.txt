@@ -1,9 +1,0 @@
-- fixed a bug where the automatic backup wasn't working
-- added a file picker to select a backup file for import
-- backup files are now persistently stored in the Documents folder
-- improved restoration of scroll position after adding items to the diary
-- texts are no longer truncated after one line, but wrap over two lines now
-- various bugfixes
-
-You can find the full changelog at 
-https://github.com/davidhealey/waistline/releases

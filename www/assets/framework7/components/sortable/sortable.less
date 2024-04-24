@@ -70,6 +70,7 @@
 .sortable-enabled li:not(.no-sorting):not(.disallow-sorting) {
   .sortable-handler {
     pointer-events: auto;
+    touch-action: none;
     opacity: 1;
     &:after {
       transform: translateX(0px);
@@ -129,7 +130,4 @@
 });
 .if-md-theme({
   @import './sortable-md.less';
-});
-.if-aurora-theme({
-  @import './sortable-aurora.less';
 });

@@ -1,5 +1,0 @@
-- fixed option to follow the system theme
-- various bugfixes
-
-You can find the full changelog at 
-https://github.com/davidhealey/waistline/releases

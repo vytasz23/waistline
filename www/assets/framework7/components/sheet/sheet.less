@@ -2,8 +2,12 @@
 @import './sheet-vars.less';
 .sheet-backdrop {
   z-index: 11000;
+  &-unique {
+    z-index: 12500;
+  }
 }
 .sheet-modal {
+  overflow: hidden;
   position: absolute;
   left: 0;
   bottom: 0;
@@ -27,9 +31,10 @@
     display: block;
     transform: translate3d(0, 0, 0);
   }
-  &.modal-in-swipe-step {
+  &.modal-in-swipe-step,
+  &.modal-in-breakpoint {
     display: block;
-    transform: translate3d(0, var(--f7-sheet-swipe-step, 0), 0);
+    transform: translate3d(0, var(--f7-sheet-breakpoint, var(--f7-sheet-swipe-step, 0)), 0);
   }
   &.modal-out {
     transform: translate3d(0, 100%, 0);
@@ -56,7 +61,12 @@
     }
   }
 }
+.sheet-backdrop,
+.sheet-modal {
+  transition-timing-function: var(--f7-sheet-transition-timing-function);
+}
 .sheet-modal-top {
+  border-radius: 0 0 var(--f7-sheet-border-radius) var(--f7-sheet-border-radius);
   .hairline(bottom, var(--f7-sheet-border-color));
   &:after {
     z-index: 700;
@@ -67,6 +77,7 @@
 .sheet-modal-bottom,
 .sheet-modal:not(.sheet-modal-top) {
   --f7-safe-area-top: 0px;
+  border-radius: var(--f7-sheet-border-radius) var(--f7-sheet-border-radius) 0 0;
   .hairline(top, var(--f7-sheet-border-color));
   &:before {
     z-index: 700;
@@ -109,17 +120,18 @@ html.with-modal-sheet-push-closing {
     > .views,
     > .view {
       transition-duration: var(--f7-sheet-transition-duration);
+      transition-timing-function: var(--f7-sheet-transition-timing-function);
     }
   }
   .if-dark-theme({
-    &.theme-dark .framework7-root > .views,
-    &.theme-dark .framework7-root > .view,
-    .theme-dark .framework7-root > .views,
-    .theme-dark .framework7-root > .view,
-    .theme-dark.framework7-root > .views,
-    .theme-dark.framework7-root > .view,
-    .framework7-root > .views.theme-dark,
-    .framework7-root > .view.theme-dark {
+    &.dark .framework7-root > .views,
+    &.dark .framework7-root > .view,
+    .dark .framework7-root > .views,
+    .dark .framework7-root > .view,
+    .dark.framework7-root > .views,
+    .dark.framework7-root > .view,
+    .framework7-root > .views.dark,
+    .framework7-root > .view.dark {
       &:after {
         content: '';
         position: absolute;
@@ -130,9 +142,11 @@ html.with-modal-sheet-push-closing {
         height: 100%;
         background: rgba(255,255,255,0.1);
         z-index: 13000;
-        border-radius: var(--f7-sheet-push-border-radius) var(--f7-sheet-push-border-radius) 0 0;
         opacity: 1;
-        animation: sheet-dark-push-overlay-fade-in var(--f7-sheet-transition-duration) forwards;
+        transition-duration: var(--f7-sheet-transition-duration);
+        transition-timing-function: var(--f7-sheet-transition-timing-function);
+        animation: sheet-dark-push-overlay-fade-in var(--f7-sheet-transition-duration);
+        animation-timing-function: var(--f7-sheet-transition-timing-function);
       }
     }
   });
@@ -149,16 +163,17 @@ html.with-modal-sheet-push {
 
 .if-dark-theme({
   html.with-modal-sheet-push-closing {
-    &.theme-dark .framework7-root > .views,
-    &.theme-dark .framework7-root > .view,
-    .theme-dark .framework7-root > .views,
-    .theme-dark .framework7-root > .view,
-    .theme-dark.framework7-root > .views,
-    .theme-dark.framework7-root > .view,
-    .framework7-root > .views.theme-dark,
-    .framework7-root > .view.theme-dark {
+    &.dark .framework7-root > .views,
+    &.dark .framework7-root > .view,
+    .dark .framework7-root > .views,
+    .dark .framework7-root > .view,
+    .dark.framework7-root > .views,
+    .dark.framework7-root > .view,
+    .framework7-root > .views.dark,
+    .framework7-root > .view.dark {
       &:after {
-        animation: sheet-dark-push-overlay-fade-out var(--f7-sheet-transition-duration) forwards;
+        opacity: 0;
+        animation: none;
       }
     }
   }
@@ -171,14 +186,6 @@ html.with-modal-sheet-push {
       opacity: 1;
     }
   }
-  @keyframes sheet-dark-push-overlay-fade-out {
-    from {
-      opacity: 1;
-    }
-    to {
-      opacity: 0;
-    }
-  }
 });
 
 .if-ios-theme({
@@ -186,7 +193,4 @@ html.with-modal-sheet-push {
 });
 .if-md-theme({
   @import './sheet-md.less';
-});
-.if-aurora-theme({
-  @import './sheet-aurora.less';
 });

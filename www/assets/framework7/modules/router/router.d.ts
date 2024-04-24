@@ -2,18 +2,18 @@ import Framework7, {
   Framework7EventsClass,
   Framework7Plugin,
   CSSSelector,
-} from '../../components/app/app-class';
+} from '../../components/app/app-class.js';
 import { Dom7, Dom7Array } from 'dom7';
-import { View } from '../../components/view/view';
+import { View } from '../../components/view/view.js';
 
-import { ComponentFunction as Component } from '../../modules/component/component';
-import { Actions } from '../../components/actions/actions';
-import { Popup } from '../../components/popup/popup';
-import { LoginScreen } from '../../components/login-screen/login-screen';
-import { Popover } from '../../components/popover/popover';
-import { Modal } from '../../components/modal/modal';
-import { Sheet } from '../../components/sheet/sheet';
-import { Panel } from '../../components/panel/panel';
+import { ComponentFunction as Component } from '../../modules/component/component.js';
+import { Actions } from '../../components/actions/actions.js';
+import { Popup } from '../../components/popup/popup.js';
+import { LoginScreen } from '../../components/login-screen/login-screen.js';
+import { Popover } from '../../components/popover/popover.js';
+import { Modal } from '../../components/modal/modal.js';
+import { Sheet } from '../../components/sheet/sheet.js';
+import { Panel } from '../../components/panel/panel.js';
 
 export namespace Router {
   interface ModalRouteParameters {
@@ -226,7 +226,7 @@ export namespace Router {
     /** Go back to previous page, going back in View history */
     back(url?: string, options?: RouteOptions): Router;
     /** Refresh/reload current page */
-    refreshPage(): Router;
+    refreshPage(props?: any): Router;
     /** Clear router previous pages history and remove all previous pages from DOM */
     clearPreviousHistory(): Router;
     /** Updates current route url, and updates `router.currentRoute` properties (query, params, hash, etc.) based on passed url. This method doesn't load or reload any content. It just changes current route url */
@@ -247,14 +247,12 @@ export namespace Router {
     /** Event will be fired when router.updateCurrentUrl method called */
     routeUrlUpdate(newRoute: Route, router: Router): void;
 
-    /** Event will be fired after router XHR opened and before XHR send. Can be used to modify the XHR object before it is sent. Use this callback to set custom headers, etc. As an arguments receives XHR object and navigating options object */
-    routerAjaxStart(xhr: XMLHttpRequest, options: RouteOptions): void;
     /** Event will be fired when the request succeeds. As an arguments receives XHR object and navigating options object */
-    routerAjaxSuccess(xhr: XMLHttpRequest, options: RouteOptions): void;
+    routerAjaxSuccess(response: Response, options: RouteOptions): void;
     /** Event will be fired if the request fails. As an arguments receives XHR object and navigating options object */
-    routerAjaxError(xhr: XMLHttpRequest, options: RouteOptions): void;
+    routerAjaxError(response: Response, options: RouteOptions): void;
     /** Event will be fired when the request finishes. As an arguments receives XHR object and navigating options object */
-    routerAjaxComplete(xhr: XMLHttpRequest, options: RouteOptions): void;
+    routerAjaxComplete(response: Response, options: RouteOptions): void;
 
     /** Event will be triggered during swipe back move */
     swipebackMove(data: SwipeBackData): void;

@@ -1,6 +1,10 @@
 import { Dom7Array } from 'dom7';
-import Framework7, { CSSSelector, Framework7EventsClass, Framework7Plugin } from '../app/app-class';
-import { View } from '../view/view';
+import Framework7, {
+  CSSSelector,
+  Framework7EventsClass,
+  Framework7Plugin,
+} from '../app/app-class.js';
+import { View } from '../view/view.js';
 
 export namespace PhotoBrowser {
   interface Photo {
@@ -14,6 +18,8 @@ export namespace PhotoBrowser {
   interface Parameters {
     /** Array with URLs of photos or array of objects with "url" (or "html") and "caption" properties. */
     photos?: Photo[] | string[];
+    /** Array with URLs of thumbs. If not specified or empty array will not render thumbs */
+    thumbs?: string[];
     /** Enable disable exposition mode when clicking on Photo Browser. (default true) */
     exposition?: boolean;
     /** Set to true if you also want to hide captions in exposition mode (default false) */
@@ -40,7 +46,9 @@ export namespace PhotoBrowser {
     toolbar?: boolean;
     /** Text on back link in Photo Browser's navbar (default "Back") */
     pageBackLinkText?: string;
-    /** Text on close link in Photo Browser's navbar when opened in Popup or as Standalone (default "Close") */
+    /** Close icon (x mark) in Photo Browser's navbar when opened in Popup or as Standalone (default true) */
+    popupCloseLinkIcon?: boolean;
+    /** Text on close link in Photo Browser's navbar when opened in Popup or as Standalone (default undefined) */
     popupCloseLinkText?: string;
     /** Text of "of" in photos counter: "3 of 5" (default "of") */
     navbarOfText?: string;
@@ -52,6 +60,10 @@ export namespace PhotoBrowser {
     swiper?: object;
     /** When enabled then Swiper will use Virtual Slides (default true) */
     virtualSlides?: boolean;
+    /** Enables lazy loading images (default true) */
+    lazy?: boolean;
+    /** When enabled, Photo Browser popup will be closed on backdrop click. (default true) */
+    closeByBackdropClick?: boolean;
 
     /** Function to render navbar, must return navbar HTML string */
     renderNavbar?: () => string;
@@ -65,6 +77,8 @@ export namespace PhotoBrowser {
     renderLazyPhoto?: (photo: Photo | string, index: number) => string;
     /** Function to render photo as a swiper slide, must return slide HTML string */
     renderPhoto?: (photo: Photo | string, index: number) => string;
+    /** Function to render thumb image as a swiper slide, must return slide HTML string */
+    renderThumb?: (thumbUrl: string, index: number) => string;
     /** Function to render photobrowser page, must return full page HTML layout string */
     renderPage?: () => string;
     /** Function to render photobrowser popup, must return full popup HTML layout string */
@@ -128,10 +142,6 @@ export namespace PhotoBrowser {
     slideChangeTransitionStart: (photoBrowser: PhotoBrowser) => void;
     /** Event will be fired after animation to other slide (next or previous) */
     slideChangeTransitionEnd: (photoBrowser: PhotoBrowser) => void;
-    /** Event will be fired in the beginning of lazy loading of image */
-    lazyImageLoad: (photoBrowser: PhotoBrowser) => void;
-    /** Event will be fired when lazy loading image will be loaded */
-    lazyImageReady: (photoBrowser: PhotoBrowser) => void;
     /** Event will be fired when user touch Swiper. Receives 'touchstart' event as an arguments */
     touchStart: (photoBrowser: PhotoBrowser) => void;
     /** Event will be fired when user touch and move finger over Swiper in direction opposite to direction parameter. Receives 'touchmove' event as an arguments */

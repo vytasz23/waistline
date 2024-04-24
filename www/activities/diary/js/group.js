@@ -76,7 +76,7 @@ app.Group = {
     let showTimestamps = app.Settings.get("diary", "timestamps");
     let showBrand = app.Settings.get("diary", "show-brands");
     this.items.forEach((x) => {
-      app.FoodsMealsRecipes.renderItem(x, innerUl, false, false, true, undefined, self.removeItem, undefined, showTimestamps, showBrand, "diary");
+      app.FoodsMealsRecipes.renderItem(x, innerUl, false, false, true, undefined, self.removeItem, undefined, showTimestamps, showBrand, "diary", self.removeItem);
     });
 
     let nutrition = await app.FoodsMealsRecipes.getTotalNutrition(this.items, "subtract");
@@ -143,8 +143,8 @@ app.Group = {
     });
   },
 
-  removeItem: function(item, li) {
-    app.Diary.deleteItem(item, li);
+  removeItem: function(item, li, notify) {
+    app.Diary.deleteItem(item, li, notify);
   },
 
   reset: function() {

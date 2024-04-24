@@ -1,4 +1,0 @@
-- re-release due to problem with f-droid
-
-You can find the full changelog at 
-https://github.com/davidhealey/waistline/releases

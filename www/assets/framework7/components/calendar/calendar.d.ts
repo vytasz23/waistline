@@ -1,6 +1,10 @@
 import { Dom7Array } from 'dom7';
-import Framework7, { CSSSelector, Framework7EventsClass, Framework7Plugin } from '../app/app-class';
-import { View } from '../view/view';
+import Framework7, {
+  CSSSelector,
+  Framework7EventsClass,
+  Framework7Plugin,
+} from '../app/app-class.js';
+import { View } from '../view/view.js';
 
 export namespace Calendar {
   interface Calendar extends Framework7EventsClass<Events> {
@@ -82,14 +86,14 @@ export namespace Calendar {
   interface Parameters {
     /** Array with initial selected dates. Each array item represents selected date. */
     value?: Date[];
-    /** Additonal disabled dates. Parameter accepts so called Date Range (look below for details). */
+    /** Additional disabled dates. Parameter accepts so called Date Range (look below for details). */
     disabled?: DateRange;
-    /** Dates with events. Will be marked with additonal "dot" on calendar day. Parameter accepts so called Date Range (look below for details).. */
+    /** Dates with events. Will be marked with additional "dot" on calendar day. Parameter accepts so called Date Range (look below for details).. */
     events?: DateRange | (Extract<DateRange, {}> & { color: string });
     /** Date ranges you want to add custom CSS class for additional styling. Look below for accepted format. */
     rangesClasses?: RangeClass[];
     /** Function to format input value, should return new/formatted string value. values is array where each item represents selected date. */
-    formatValue?: (values: Date) => string;
+    formatValue?: (values: Date[]) => string;
     /** Intl locale string. see https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/DateTimeFormat */
     locale?: string;
     /** Array with full month names. (default "auto") */
@@ -143,6 +147,8 @@ export namespace Calendar {
     yearPickerMax?: number;
     /** Enables time picker (default false) */
     timePicker?: boolean;
+    /** Time picker label text (default "Time") */
+    timePickerLabel?: string;
     /** Time format displayed in time selector. (default { hour: 'numeric', minute: 'numeric' }) */
     timePickerFormat?: Intl.DateTimeFormatOptions;
     /** Text to display in time selector placeholder. (default "Select time") */
@@ -201,6 +207,8 @@ export namespace Calendar {
     renderToolbar?: () => string;
     /** Function to render whole calendar. Must return calendar full HTML string. */
     render?: () => string;
+    /** Enables Calendar backdrop (dark semi transparent layer behind). By default only it is enabled when Calendar opened in Popover. */
+    backdrop?: boolean | undefined;
 
     on?: {
       [event in keyof Events]?: Events[event];
