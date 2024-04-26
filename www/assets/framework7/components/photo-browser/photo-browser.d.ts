@@ -1,6 +1,10 @@
 import { Dom7Array } from 'dom7';
-import Framework7, { CSSSelector, Framework7EventsClass, Framework7Plugin } from '../app/app-class';
-import { View } from '../view/view';
+import Framework7, {
+  CSSSelector,
+  Framework7EventsClass,
+  Framework7Plugin,
+} from '../app/app-class.js';
+import { View } from '../view/view.js';
 
 export namespace PhotoBrowser {
   interface Photo {
@@ -52,6 +56,8 @@ export namespace PhotoBrowser {
     swiper?: object;
     /** When enabled then Swiper will use Virtual Slides (default true) */
     virtualSlides?: boolean;
+    /** When enabled, Photo Browser popup will be closed on backdrop click. (default true) */
+    closeByBackdropClick?: boolean;
 
     /** Function to render navbar, must return navbar HTML string */
     renderNavbar?: () => string;

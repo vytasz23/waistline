@@ -1,5 +1,9 @@
 import { Dom7Array } from 'dom7';
-import Framework7, { CSSSelector, Framework7EventsClass, Framework7Plugin } from '../app/app-class';
+import Framework7, {
+  CSSSelector,
+  Framework7EventsClass,
+  Framework7Plugin,
+} from '../app/app-class.js';
 
 export namespace Notification {
   interface Notification extends Framework7EventsClass<Events> {
@@ -44,7 +48,7 @@ export namespace Notification {
     /** Element to mount notifications to. (default app.el) */
     containerEl?: HTMLElement | CSSSelector;
     /** Custom function to render Notification. Must return notification html. */
-    render?: () => string;
+    render?: (notification: Notification) => string;
     /** Object with events handlers.. */
     on?: {
       [event in keyof Events]?: Events[event];
