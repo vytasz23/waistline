@@ -486,7 +486,7 @@ app.FoodsMealsRecipes = {
         swipeOut.className = "swipeout-actions-right";
         let swipeOutButton = document.createElement("a");
         swipeOutButton.href = "#";
-        swipeOutButton.className = "swipeout-delete";
+        swipeOutButton.classList.add("swipeout-delete", "swipeout-overswipe");
         swipeOutButton.innerText = "Delete";
         swipeOut.appendChild(swipeOutButton);
         li.appendChild(swipeOut);

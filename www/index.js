@@ -146,6 +146,9 @@ const app = {
     touch: {
       tapHold: true
     },
+    swipeout: {
+      overswipeRatio: 5.0
+    },
     // Add default routes
     routes: [{
         name: "Statistics",

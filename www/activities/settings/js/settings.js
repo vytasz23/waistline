@@ -276,11 +276,9 @@ app.Settings = {
 
     if (appMode === "dark") {
       html.classList.add("dark");
-      panel.style["background-color"] = "black";
       Chart.defaults.global.defaultFontColor = "white";
     } else if (appMode === "light") {
       html.classList.remove("dark");
-      panel.style["background-color"] = "white";
       Chart.defaults.global.defaultFontColor = "black";
     }
   },
