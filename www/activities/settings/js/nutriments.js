@@ -126,7 +126,7 @@ app.Nutriments = {
 
     // Create dialog inputs
     let inputs = document.createElement("form");
-    inputs.className = "list no-hairlines-md";
+    inputs.className = "list";
 
     let ul = document.createElement("ul");
     inputs.appendChild(ul);
