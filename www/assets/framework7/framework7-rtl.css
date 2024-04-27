@@ -1,13 +1,13 @@
 /**
- * Framework7 8.0.0
+ * Framework7 8.3.3
  * Full featured mobile HTML framework for building iOS & Android apps
  * https://framework7.io/
  *
- * Copyright 2014-2023 Vladimir Kharlampidi
+ * Copyright 2014-2024 Vladimir Kharlampidi
  *
  * Released under the MIT License
  *
- * Released on: April 3, 2023
+ * Released on: March 25, 2024
  */
 
 /*====================
@@ -139,6 +139,9 @@
   font-style: normal;
 }
 html {
+  overscroll-behavior: none;
+}
+html {
   direction: rtl;
 }
 html,
@@ -155,12 +158,33 @@ body {
   width: 100%;
   background: #fff;
   overflow: hidden;
+  overflow-y: scroll;
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   font-family: var(--f7-font-family);
   font-size: var(--f7-font-size);
   line-height: var(--f7-line-height);
   color: var(--f7-text-color);
+  scrollbar-width: none;
+  scrollbar-color: transparent;
+}
+body::-webkit-scrollbar {
+  -webkit-appearance: none;
+          appearance: none;
+  width: 0px;
+  display: none;
+  opacity: 0;
+  background: transparent;
+}
+body::-webkit-scrollbar-track {
+  box-shadow: none;
+  background: transparent;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  outline: none;
+  border-radius: 9999px;
+  position: relative;
 }
 .dark body,
 body.dark {
@@ -671,6 +695,10 @@ html.device-full-viewport body {
   background: var(--f7-page-bg-color);
   z-index: 100;
 }
+.router-transition-f7-circle-forward .page,
+.router-transition-f7-circle-backward .page {
+  pointer-events: none;
+}
 .router-transition-f7-circle-forward:after {
   transform: scale(0);
   border-radius: 50%;
@@ -756,6 +784,10 @@ html.device-full-viewport body {
   background: #000;
   perspective: 1200px;
 }
+.router-transition-f7-cover-v-forward .page,
+.router-transition-f7-cover-v-backward .page {
+  pointer-events: none;
+}
 .router-transition-f7-cover-v-forward .page-next {
   animation: f7-cover-v-next-to-current var(--f7-page-cover-transition-duration) forwards;
 }
@@ -809,6 +841,10 @@ html.device-full-viewport body {
   background: #000;
   perspective: 1200px;
 }
+.router-transition-f7-cover-forward .page,
+.router-transition-f7-cover-backward .page {
+  pointer-events: none;
+}
 .router-transition-f7-cover-forward .page-next {
   animation: f7-cover-next-to-current var(--f7-page-cover-transition-duration) forwards;
 }
@@ -861,6 +897,10 @@ html.device-full-viewport body {
 .router-transition-f7-dive-backward {
   background: var(--f7-page-bg-color);
   perspective: 1200px;
+}
+.router-transition-f7-dive-forward .page,
+.router-transition-f7-dive-backward .page {
+  pointer-events: none;
 }
 .router-transition-f7-dive-forward .page-next {
   animation: f7-dive-next-to-current var(--f7-page-dive-transition-duration) forwards;
@@ -930,6 +970,10 @@ html.device-full-viewport body {
 .router-transition-f7-fade-backward {
   background: var(--f7-page-bg-color);
 }
+.router-transition-f7-fade-forward .page,
+.router-transition-f7-fade-backward .page {
+  pointer-events: none;
+}
 .ios .router-transition-f7-fade-forward .page-next,
 .md .router-transition-f7-fade-forward .page-next {
   opacity: 0;
@@ -979,6 +1023,7 @@ html.device-full-viewport body {
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
   overflow: hidden;
+  pointer-events: none;
 }
 .router-transition-f7-flip-forward .page-next {
   transform-style: preserve-3d;
@@ -1036,11 +1081,17 @@ html.device-full-viewport body {
     transform: translateZ(0px) rotateY(0deg);
   }
 }
+.router-transition-f7-parallax-forward .page {
+  pointer-events: none;
+}
 .router-transition-f7-parallax-forward .page-next {
   animation: f7-parallax-next-to-current var(--f7-page-parallax-transition-duration) forwards;
 }
 .router-transition-f7-parallax-forward .page-current {
   animation: f7-parallax-current-to-prev var(--f7-page-parallax-transition-duration) forwards;
+}
+.router-transition-f7-parallax-backward .page {
+  pointer-events: none;
 }
 .router-transition-f7-parallax-backward .page-current {
   animation: f7-parallax-current-to-next var(--f7-page-parallax-transition-duration) forwards;
@@ -1080,11 +1131,17 @@ html.device-full-viewport body {
     transform: translateX(0%);
   }
 }
+.router-transition-f7-push-forward .page {
+  pointer-events: none;
+}
 .router-transition-f7-push-forward .page-next {
   animation: f7-push-next-to-current var(--f7-page-push-transition-duration) forwards;
 }
 .router-transition-f7-push-forward .page-current {
   animation: f7-push-current-to-prev var(--f7-page-push-transition-duration) forwards;
+}
+.router-transition-f7-push-backward .page {
+  pointer-events: none;
 }
 .router-transition-f7-push-backward .page-current {
   animation: f7-push-current-to-next var(--f7-page-push-transition-duration) forwards;
@@ -2442,13 +2499,26 @@ html.device-full-viewport body {
   justify-content: flex-start;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  scrollbar-color: transparent;
 }
 .tabbar-scrollable .toolbar-inner::-webkit-scrollbar {
-  display: none !important;
-  width: 0 !important;
-  height: 0 !important;
   -webkit-appearance: none;
-  opacity: 0 !important;
+          appearance: none;
+  width: 0px;
+  display: none;
+  opacity: 0;
+  background: transparent;
+}
+.tabbar-scrollable .toolbar-inner::-webkit-scrollbar-track {
+  box-shadow: none;
+  background: transparent;
+}
+.tabbar-scrollable .toolbar-inner::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  outline: none;
+  border-radius: 9999px;
+  position: relative;
 }
 .tabbar-scrollable .tab-link,
 .tabbar-scrollable .link {
@@ -4490,7 +4560,9 @@ li.list-group-title:after,
   --f7-button-border-radius: 4px;
   --f7-button-font-weight: 600;
   --f7-button-letter-spacing: 0;
+  /*
   --f7-button-outline-border-color: var(--f7-theme-color);
+  */
   --f7-button-outline-border-width: 2px;
   /*
   --f7-button-pressed-bg-color: rgba(var(--f7-theme-color-rgb), .15);
@@ -5004,7 +5076,9 @@ button .ripple-wave,
 .stepper-button .ripple-wave,
 .stepper-button-minus .ripple-wave,
 .stepper-button-plus .ripple-wave,
-.list.accordion-list .accordion-item-toggle .ripple-wave {
+.list.accordion-list .accordion-item-toggle .ripple-wave,
+.photo-browser .toolbar .link .ripple-wave,
+.ripple-blur .ripple-wave {
   animation: touch-ripple-in-blurred 250ms forwards;
   background-image: radial-gradient(closest-side circle at 50% 50%, var(--f7-touch-ripple-color) 50%, rgba(255, 255, 255, 0));
   background-color: transparent;

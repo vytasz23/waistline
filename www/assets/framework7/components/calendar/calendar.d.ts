@@ -93,7 +93,7 @@ export namespace Calendar {
     /** Date ranges you want to add custom CSS class for additional styling. Look below for accepted format. */
     rangesClasses?: RangeClass[];
     /** Function to format input value, should return new/formatted string value. values is array where each item represents selected date. */
-    formatValue?: (values: Date) => string;
+    formatValue?: (values: Date[]) => string;
     /** Intl locale string. see https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/DateTimeFormat */
     locale?: string;
     /** Array with full month names. (default "auto") */
@@ -207,6 +207,8 @@ export namespace Calendar {
     renderToolbar?: () => string;
     /** Function to render whole calendar. Must return calendar full HTML string. */
     render?: () => string;
+    /** Enables Calendar backdrop (dark semi transparent layer behind). By default only it is enabled when Calendar opened in Popover. */
+    backdrop?: boolean | undefined;
 
     on?: {
       [event in keyof Events]?: Events[event];

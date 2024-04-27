@@ -107,10 +107,11 @@ class Popup extends Modal {
     let popupHeight;
     let $pushEl;
     function handleTouchStart(e) {
-      if (isTouched || !allowSwipeToClose || !popup.params.swipeToClose) return;
+      if (isTouched || !allowSwipeToClose || !popup.params.swipeToClose || !e.isTrusted) return;
       if (popup.params.swipeHandler && $(e.target).closest(popup.params.swipeHandler).length === 0) {
         return;
       }
+      if ($(e.target).closest('.sortable-handler').length > 0) return;
       isTouched = true;
       isMoved = false;
       startTouch = {
@@ -124,7 +125,7 @@ class Popup extends Modal {
       }
     }
     function handleTouchMove(e) {
-      if (!isTouched) return;
+      if (!isTouched || !e.isTrusted) return;
       currentTouch = {
         x: e.type === 'touchmove' ? e.targetTouches[0].pageX : e.pageX,
         y: e.type === 'touchmove' ? e.targetTouches[0].pageY : e.pageY
@@ -197,7 +198,8 @@ class Popup extends Modal {
       }
       $el.transition(0).transform(`translate3d(0,${-touchesDiff}px,0)`);
     }
-    function handleTouchEnd() {
+    function handleTouchEnd(e) {
+      if (!e.isTrusted) return;
       isTouched = false;
       if (!isMoved) {
         return;

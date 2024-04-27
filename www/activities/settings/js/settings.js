@@ -263,9 +263,9 @@ app.Settings = {
     body.className = colourTheme;
 
     if (appMode === "system") {
-      app.f7.enableAutoDarkMode(); // darkThemeChange event will handle the rest
+      app.f7.setDarkMode("auto");
     } else {
-      app.f7.disableAutoDarkMode();
+      app.f7.setDarkMode(false);
       app.Settings.applyAppMode(appMode);
     }
   },

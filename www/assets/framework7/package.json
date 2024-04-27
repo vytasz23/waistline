@@ -1,15 +1,33 @@
 {
   "name": "framework7",
-  "version": "8.0.0",
+  "version": "8.3.3",
   "description": "Full featured mobile HTML framework for building iOS & Android apps",
   "type": "module",
   "exports": {
-    ".": "./framework7.esm.js",
-    "./core": "./framework7.esm.js",
-    "./bundle": "./framework7-bundle.esm.js",
-    "./lite": "./framework7-lite.esm.js",
-    "./lite/bundle": "./framework7-lite-bundle.esm.js",
-    "./lite-bundle": "./framework7-lite-bundle.esm.js",
+    ".": {
+      "import": "./framework7.esm.js",
+      "types": "./framework7.d.ts"
+    },
+    "./core": {
+      "import": "./framework7.esm.js",
+      "types": "./framework7.d.ts"
+    },
+    "./bundle": {
+      "import": "./framework7-bundle.esm.js",
+      "types": "./framework7.d.ts"
+    },
+    "./lite": {
+      "import": "./framework7-lite.esm.js",
+      "types": "./framework7.d.ts"
+    },
+    "./lite/bundle": {
+      "import": "./framework7-lite-bundle.esm.js",
+      "types": "./framework7.d.ts"
+    },
+    "./lite-bundle": {
+      "import": "./framework7-lite-bundle.esm.js",
+      "types": "./framework7.d.ts"
+    },
     "./less": "./framework7.less",
     "./less/bundle": "./framework7-bundle.less",
     "./css": "./framework7.css",
@@ -434,7 +452,7 @@
     "path-to-regexp": "^6.2.0",
     "skeleton-elements": "^4.0.1",
     "ssr-window": "^4.0.2",
-    "swiper": "^9.2.0"
+    "swiper": "^10.2.0"
   },
-  "releaseDate": "April 3, 2023"
+  "releaseDate": "March 25, 2024"
 }
