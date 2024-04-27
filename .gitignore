@@ -9,5 +9,6 @@ plugins/
 tasks
 test
 package-lock.json
+jsconfig.json
 /.vscode
 /typings

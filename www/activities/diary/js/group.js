@@ -91,7 +91,7 @@ app.Group = {
     ul.appendChild(li);
 
     let row = document.createElement("div");
-    row.className = "row item-content";
+    row.className = "grid grid-cols-4 item-content";
     li.appendChild(row);
 
     //Add button 

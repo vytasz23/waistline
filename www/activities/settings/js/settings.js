@@ -263,9 +263,9 @@ app.Settings = {
     body.className = colourTheme;
 
     if (appMode === "system") {
-      app.f7.setDarkMode('auto'); // darkThemeChange event will handle the rest
+      app.f7.setDarkMode("auto");
     } else {
-      app.f7.setDarkMode('false');
+      app.f7.setDarkMode(false);
       app.Settings.applyAppMode(appMode);
     }
   },
@@ -276,11 +276,9 @@ app.Settings = {
 
     if (appMode === "dark") {
       html.classList.add("dark");
-      panel.style["background-color"] = "black";
       Chart.defaults.global.defaultFontColor = "white";
     } else if (appMode === "light") {
       html.classList.remove("dark");
-      panel.style["background-color"] = "white";
       Chart.defaults.global.defaultFontColor = "black";
     }
   },

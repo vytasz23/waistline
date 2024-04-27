@@ -311,15 +311,15 @@ app.Diary = {
         swiper.appendSlide(slide);
 
         rows[0] = document.createElement("div");
-        rows[0].className = "row nutrition-total-title";
+        rows[0].className = "grid grid-cols-4 nutrition-total-title";
         slide.appendChild(rows[0]);
 
         rows[1] = document.createElement("div");
-        rows[1].className = "row nutrition-total-values";
+        rows[1].className = "grid grid-cols-4 nutrition-total-values";
         slide.appendChild(rows[1]);
 
         rows[2] = document.createElement("div");
-        rows[2].className = "row nutrition-total-remaining";
+        rows[2].className = "grid grid-cols-4 nutrition-total-remaining";
         slide.appendChild(rows[2]);
       }
 

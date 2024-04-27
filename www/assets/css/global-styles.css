@@ -59,25 +59,3 @@ div.food-thumbnail > img {max-width: 100%; max-height: 12em;}
 .list .item-subtitle {font-style: italic;}
 
 .notification-text {overflow-wrap: break-word;}
-
-/* Custom color themes */
-.color-theme-pink {
-  --f7-theme-color: #f6b0ba;
-  --f7-theme-color-rgb: 246, 176, 186;
-  --f7-theme-color-shade: #f28b9a;
-  --f7-theme-color-tint: #fad5da;
-}
-
-.color-theme-camino {
-  --f7-theme-color: #FF5FE1;
-  --f7-theme-color-rgb: 255, 95, 225;
-  --f7-theme-color-shade: #ff36d9;
-  --f7-theme-color-tint: #ff88e9;
-}
-
-.color-theme-eink {
-  --f7-theme-color: #253238;
-  --f7-theme-color-rgb: 37, 50, 56;
-  --f7-theme-color-shade: #151c1f;
-  --f7-theme-color-tint: #354851;
-}

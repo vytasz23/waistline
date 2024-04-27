@@ -131,12 +131,9 @@ const app = {
 
   f7: new Framework7({
     // App root element
-    root: "#app",
+    el: "#app",
     // App Name
     name: "Waistline",
-    // App id
-    id: "com.waist.line",
-    version: "2.9.2",
     // Enable swipe panel
     panel: {
       swipe: true,
@@ -147,8 +144,10 @@ const app = {
       dateFormat: 'dd.mm.yyyy',
     },
     touch: {
-      tapHold: true, //enable tap hold events
-      disableContextMenu: false
+      tapHold: true
+    },
+    swipeout: {
+      overswipeRatio: 5.0
     },
     // Add default routes
     routes: [{
