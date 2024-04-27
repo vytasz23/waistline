@@ -671,33 +671,39 @@ app.Diary = {
     });
   },
 
-  deleteItem: function(item, li) {
+  deleteItem: function(item, li, notify = true) {
     let title = app.strings.dialogs["delete-title"] || "Delete Entry";
     let text = app.strings.dialogs["confirm-delete"] || "Are you sure you want to delete this?";
 
-    let dialog = app.f7.dialog.create({
-      title: title,
-      content: app.Utils.getDialogTextDiv(text),
-      buttons: [{
-          text: app.strings.dialogs.cancel || "Cancel",
-          keyCodes: app.Utils.escapeKeyCode
-        },
-        {
-          text: app.strings.dialogs.delete || "Delete",
-          keyCodes: app.Utils.enterKeyCode,
-          onClick: async () => {
-            let entry = await app.Diary.getEntryFromDB();
+    async function deleteConfirmed() {
+      let entry = await app.Diary.getEntryFromDB();
+  
+      if (entry !== undefined)
+        entry.items.splice(item.index, 1);
 
-            if (entry !== undefined)
-              entry.items.splice(item.index, 1);
-
-            await dbHandler.put(entry, "diary");
-            let scrollPosition = { position: $(".page-current .page-content").scrollTop() };
-            app.Diary.render(scrollPosition);
+      await dbHandler.put(entry, "diary");
+      let scrollPosition = { position: $(".page-current .page-content").scrollTop() };
+      app.Diary.render(scrollPosition);
+    }
+    
+    if (notify) {
+      let dialog = app.f7.dialog.create({
+        title: title,
+        content: app.Utils.getDialogTextDiv(text),
+        buttons: [{
+            text: app.strings.dialogs.cancel || "Cancel",
+            keyCodes: app.Utils.escapeKeyCode
+          },
+          {
+            text: app.strings.dialogs.delete || "Delete",
+            keyCodes: app.Utils.enterKeyCode,
+            onClick: deleteConfirmed
           }
-        }
-      ]
-    }).open();
+        ]
+      }).open();
+    } else {
+      deleteConfirmed();
+    }
   },
 
   quickAdd: function(category) {

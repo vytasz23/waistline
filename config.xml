@@ -4,8 +4,8 @@
     <description>
         A libre calorie counter including a barcode scanner linked to the Open Food Facts database.
     </description>
-    <author email="dave41264@hotmail.com" href="">
-        David Healey
+    <author email="vudalovas@gmail.com" href="">
+        David Healey, Vytautas Udalovas
     </author>
     <content src="index.html" />
     <access origin="*" />
@@ -15,7 +15,7 @@
     <allow-navigation href="*" />
     <allow-intent href="market:*" />
     <platform name="android">
-        <preference name="android-minSdkVersion" value="21" />
+        <preference name="android-minSdkVersion" value="33" />
         <preference name="android-compileSdkVersion" value="33" />
         <preference name="android-targetSdkVersion" value="33" />
         <preference name="AndroidPersistentFileLocation" value="Compatibility" />
@@ -42,7 +42,7 @@
         <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/screen/android/splashscreen.xml" />
         <preference name="AndroidWindowSplashScreenBackground" value="#973939" />
         <preference name="AndroidPostSplashScreenTheme" value="@style/Theme.AppCompat.DayNight.NoActionBar" />
-        <hook type="after_prepare" src="hooks/stripExtraWriteExternalStoragePerm.js"/>
+        <hook type="after_prepare" src="hooks/stripExtraWriteExternalStoragePerm.js" />
     </platform>
     <platform name="electron">
         <preference name="ElectronSettingsFilePath" value="res/electron/settings.json" />
