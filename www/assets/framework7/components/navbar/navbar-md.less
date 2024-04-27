@@ -1,9 +1,15 @@
 .md {
   .navbar {
+    .title-large {
+      align-items: center;
+    }
+    .left {
+      margin-left: 4px;
+      margin-right: 4px;
+    }
     a.link {
       padding: 0 12px;
       min-width: 48px;
-      .link-highlight();
     }
     a.icon-only {
       min-width: 0;
@@ -13,8 +19,10 @@
     .right {
       .ltr({
         margin-left: auto;
+        margin-right: 4px;
       });
       .rtl({
+        margin-left: 4px;
         margin-right: auto;
       });
     }
@@ -36,6 +44,9 @@
   }
   .page.page-with-subnavbar .navbar-inner {
     overflow: visible;
+  }
+  .navbar-inner:not(.navbar-inner-centered-title) .title:first-child {
+    margin-left: 16px;
   }
   .navbar-inner-centered-title {
     justify-content: space-between;
